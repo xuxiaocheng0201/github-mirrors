@@ -7,6 +7,7 @@
 !/wrangler.toml
 
 !/src
+!/Readme.md
 
 !/vitest.config.mts
 !/test
