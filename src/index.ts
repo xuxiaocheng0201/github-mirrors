@@ -111,18 +111,16 @@ async function requestToOrigin(request: Request) {
 	for (const [key, value] of request.headers) {
 		headers.set(key, replaceToOrigin(value));
 	}
-	let body;
-	if (requireReplaceContent(headers)) {
-		let text = await request.text();
-		body = replaceToOrigin(text);
-	} else {
-		body = request.body;
-	}
-	return new Request(originUrl, {
-		method: request.method,
-		headers: headers,
-		body: body,
-	});
+	const replace = requireReplaceContent(headers);
+	const body = replace ? replaceToOrigin(await request.text()) : request.body;
+	return {
+		"replaced": replace,
+		"request": new Request(originUrl, {
+			method: request.method,
+			headers: headers,
+			body: body,
+		})
+	};
 }
 
 async function responseToProxy(response: Response) {
@@ -130,26 +128,24 @@ async function responseToProxy(response: Response) {
 	for (const [key, value] of response.headers) {
 		headers.set(key, replaceToProxy(value));
 	}
-	let body;
-	if (requireReplaceContent(headers)) {
-		let text = await response.text();
-		body = replaceToOrigin(text);
-	} else {
-		body = response.body;
-	}
-	return new Response(body, {
-		status: response.status,
-		headers: headers,
-	});
+	const replace = requireReplaceContent(headers);
+	const body = replace ? replaceToProxy(await response.text()) : response.body;
+	return {
+		"replaced": replace,
+		"response": new Response(body, {
+			status: response.status,
+			headers: headers,
+		})
+	};
 }
 
 function checkAccessible(request: Request, env: Env) {
-	const user_agent = request.headers.get("user-agent");
+	const userAgent = request.headers.get("user-agent");
 	const ip = request.headers.get("cf-connecting-ip");
 	const country = request.headers.get("cf-ipcountry");
-	if (user_agent == null || ip == null || country == null) return false;
-	if (env.UA_WHITELIST_REGEX.length > 0 && !new RegExp(env.UA_WHITELIST_REGEX).test(user_agent)) return false;
-	if (env.UA_BLACKLIST_REGEX.length > 0 && new RegExp(env.UA_BLACKLIST_REGEX).test(user_agent)) return false;
+	if (userAgent == null || ip == null || country == null) return false;
+	if (env.UA_WHITELIST_REGEX.length > 0 && !new RegExp(env.UA_WHITELIST_REGEX).test(userAgent)) return false;
+	if (env.UA_BLACKLIST_REGEX.length > 0 && new RegExp(env.UA_BLACKLIST_REGEX).test(userAgent)) return false;
 	if (env.IP_WHITELIST_REGEX.length > 0 && !new RegExp(env.IP_WHITELIST_REGEX).test(ip)) return false;
 	if (env.IP_BLACKLIST_REGEX.length > 0 && new RegExp(env.IP_BLACKLIST_REGEX).test(ip)) return false;
 	if (env.REGION_WHITELIST_REGEX.length > 0 && !new RegExp(env.REGION_WHITELIST_REGEX).test(country)) return false;
@@ -165,15 +161,17 @@ export default {
 			if (!checkAccessible(request, env)) {
 				return new Response("Not Implemented", { status: 501 });
 			}
-			const newRequest = await requestToOrigin(request);
-			const response = await fetch(newRequest);
-			const newResponse = await responseToProxy(response);
+			const { replaced: requestReplaced, request: originRequest } = await requestToOrigin(request);
+			const originResponse = await fetch(originRequest);
+			const { replaced: responseReplaced, response: response } = await responseToProxy(originResponse);
 			console.info({
+				"replaced-request": requestReplaced,
+				"replaced-response": responseReplaced,
 				"client-ip": request.headers.get("cf-connecting-ip"),
 				"user-agent": request.headers.get("user-agent"),
 				"url": request.url,
 			});
-			return newResponse;
+			return response;
 		} catch (error) {
 			console.error({
 				"error": error,
