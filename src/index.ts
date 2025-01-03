@@ -183,7 +183,7 @@ export default {
 			return response;
 		} catch (error) {
 			console.error({
-				"error": error,
+				"error": error instanceof Error ? `${error.name}: ${error.message}` : `${error}`,
 				"client-ip": request.headers.get("cf-connecting-ip"),
 				"user-agent": request.headers.get("user-agent"),
 				"url": request.url,
