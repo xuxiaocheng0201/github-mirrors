@@ -128,6 +128,13 @@ async function requestToOrigin(request: Request) {
 	for (const [key, value] of request.headers) {
 		headers.set(key, replaceToOrigin(value));
 	}
+	if (request.method == "GET" || request.method == "HEAD") {
+		// TypeError: Request with a GET or HEAD method cannot have a body.
+		return new Request(originUrl, {
+			method: request.method,
+			headers: headers,
+		});
+	}
 	const replace = requireReplaceContent(request.headers, "request");
 	const body = replace ? replaceToOrigin(await request.text()) : request.body;
 	return new Request(originUrl, {
