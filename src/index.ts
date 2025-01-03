@@ -102,20 +102,22 @@ function replaceToProxy(value: string) {
 	return value;
 }
 
-function requireReplaceContent(headers: Headers) {
+function requireReplaceContent(headers: Headers, method: string) {
 	const type = headers.get("content-type");
-	console.log(`headers type: ${type}`);
-	if (type == null) return false;
-	if (type.includes("image")) return false;
-	if (type.includes("font")) return false;
-	if (type.includes("video")) return false;
-	if (type.includes("audio")) return false;
-	for (const mime in ["text", "javascript", "json", "css", "html", "xml"]) {
-		if (type.includes(mime)) {
-			return true;
-		}
-	}
-	return false;
+	let replace: boolean | null = null;
+	if (type == null) replace = false;
+	else if (type.includes("image")) replace = false;
+	else if (type.includes("font")) replace = false;
+	else if (type.includes("video")) replace = false;
+	else if (type.includes("audio")) replace = false;
+	else if (type.includes("text")) replace = true;
+	else if (type.includes("javascript")) replace = true;
+	else if (type.includes("json")) replace = true;
+	else if (type.includes("css")) replace = true;
+	else if (type.includes("html")) replace = true;
+	else if (type.includes("xml")) replace = true;
+	console.log(`on ${method} content type '${type}': replace = ${replace}`);
+	return replace ?? false;
 }
 
 
@@ -125,16 +127,13 @@ async function requestToOrigin(request: Request) {
 	for (const [key, value] of request.headers) {
 		headers.set(key, replaceToOrigin(value));
 	}
-	const replace = requireReplaceContent(headers);
+	const replace = requireReplaceContent(request.headers, "request");
 	const body = replace ? replaceToOrigin(await request.text()) : request.body;
-	return {
-		"replaced": replace,
-		"request": new Request(originUrl, {
-			method: request.method,
-			headers: headers,
-			body: body,
-		})
-	};
+	return new Request(originUrl, {
+		method: request.method,
+		headers: headers,
+		body: body,
+	});
 }
 
 async function responseToProxy(response: Response) {
@@ -142,15 +141,12 @@ async function responseToProxy(response: Response) {
 	for (const [key, value] of response.headers) {
 		headers.set(key, replaceToProxy(value));
 	}
-	const replace = requireReplaceContent(headers);
+	const replace = requireReplaceContent(response.headers, "response");
 	const body = replace ? replaceToProxy(await response.text()) : response.body;
-	return {
-		"replaced": replace,
-		"response": new Response(body, {
-			status: response.status,
-			headers: headers,
-		})
-	};
+	return new Response(body, {
+		status: response.status,
+		headers: headers,
+	});
 }
 
 function checkAccessible(request: Request, env: Env) {
@@ -175,12 +171,10 @@ export default {
 			if (!checkAccessible(request, env)) {
 				return new Response("Not Implemented", { status: 501 });
 			}
-			const { replaced: requestReplaced, request: originRequest } = await requestToOrigin(request);
+			const originRequest = await requestToOrigin(request);
 			const originResponse = await fetch(originRequest);
-			const { replaced: responseReplaced, response: response } = await responseToProxy(originResponse);
+			const response = await responseToProxy(originResponse);
 			console.info({
-				"replaced-request": requestReplaced,
-				"replaced-response": responseReplaced,
 				"client-ip": request.headers.get("cf-connecting-ip"),
 				"user-agent": request.headers.get("user-agent"),
 				"url": request.url,
