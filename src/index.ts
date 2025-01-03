@@ -1,59 +1,64 @@
 const map = [
-	["github-mirrors-alive.wlist.top", "alive.github.com"],
-	["github-mirrors-api.wlist.top", "api.github.com"],
-	["github-mirrors-assets-cdn.wlist.top", "assets-cdn.github.com"],
-	["github-mirrors-central.wlist.top", "central.github.com"],
-	["github-mirrors-codeload.wlist.top", "codeload.github.com"],
-	["github-mirrors-collector.wlist.top", "collector.github.com"],
-	["github-mirrors-gist.wlist.top", "gist.github.com"],
-	["github-mirrors-insights.wlist.top", "insights.github.com"],// 1,
-	["github-mirrors-live.wlist.top", "live.github.com"],
-	["github-mirrors-education.wlist.top", "education.github.com"],
-	["github-mirrors-uploads.wlist.top", "uploads.github.com"],// 1,
-	["github-mirrors-status-www.wlist.top", "www.githubstatus.com"],// 1,
-	["github-mirrors-blog.wlist.top", "github.blog"],
-	["github-mirrors-community.wlist.top", "github.community"],
-	["github-mirrors-io.wlist.top", "github.io"],
-	["github-mirrors-assets.wlist.top", "github.githubassets.com"],
-	["github-mirrors-status.wlist.top", "githubstatus.com"],
+	// https://github.com
+	["github-mirrors.wlist.top", "github.com"],
+	["github-mirrors-assets.wlist.top", "github.githubassets.com"], // not necessary
+	["github-mirrors-collector.wlist.top", "collector.github.com"], // not necessary
+	["github-mirrors-api.wlist.top", "api.github.com"], // not necessary
 
-	["github-mirrors-cloud.wlist.top", "cloud.githubusercontent.com"],
-	["github-mirrors-copilot-proxy.wlist.top", "copilot-proxy.githubusercontent.com"],// 1,
-	["github-mirrors-desktop.wlist.top", "desktop.githubusercontent.com"],
-	["github-mirrors-favicons.wlist.top", "favicons.githubusercontent.com"],
+	// https://github.com/xuxiaocheng0201
 	["github-mirrors-avatars.wlist.top", "avatars.githubusercontent.com"],
-	["github-mirrors-camo.wlist.top", "camo.githubusercontent.com"],
-	["github-mirrors-media.wlist.top", "media.githubusercontent.com"],
-	["github-mirrors-objects.wlist.top", "objects.githubusercontent.com"],
-	["github-mirrors-objects-origin.wlist.top", "objects-origin.githubusercontent.com"],// 1,
-	["github-mirrors-actions.wlist.top", "pipelines.actions.githubusercontent.com"],
 	["github-mirrors-raw.wlist.top", "raw.githubusercontent.com"],
-	["github-mirrors-user-images.wlist.top", "user-images.githubusercontent.com"],
-	["github-mirrors-private-avatars.wlist.top", "private-avatars.githubusercontent.com"],// 1,
-	["github-mirrors-secured-user-images.wlist.top", "secured-user-images.githubusercontent.com"],// 1,
-	["github-mirrors-private-user-images.wlist.top", "private-user-images.githubusercontent.com"],
+	["github-mirrors-uploads.wlist.top", "uploads.github.com"],
 
-	["github-mirrors-s3-cloud.wlist.top", "github-cloud.s3.amazonaws.com"],
-	["github-mirrors-s3-com.wlist.top", "github-com.s3.amazonaws.com"],
-	["github-mirrors-s3-release-asset.wlist.top", "github-production-release-asset-2e65be.s3.amazonaws.com"],
-	["github-mirrors-s3-repository-file.wlist.top", "github-production-repository-file-5c1aeb.s3.amazonaws.com"],
-	["github-mirrors-s3-upload-manifest-file.wlist.top", "github-production-upload-manifest-file-7fdce7.s3.amazonaws.com"],// 1,
-	["github-mirrors-s3-user-asset.wlist.top", "github-production-user-asset-6210df.s3.amazonaws.com"],
+	// https://github.com/xuxiaocheng0201/github-mirrors/releases
+	["github-mirrors-codeload.wlist.top", "codeload.github.com"],
+	["github-mirrors-objects.wlist.top", "objects.githubusercontent.com"],
 
-	["github-mirrors.wlist.top", "github.com"], // This should be last one to replace
+	// https://gist.github.com
+	["github-mirrors-gist.wlist.top", "gist.github.com"],
+
+	// ["github-mirrors-alive.wlist.top", "alive.github.com"],
+	// ["github-mirrors-assets-cdn.wlist.top", "assets-cdn.github.com"],
+	// ["github-mirrors-central.wlist.top", "central.github.com"],
+	// ["github-mirrors-insights.wlist.top", "insights.github.com"],// 1,
+	// ["github-mirrors-live.wlist.top", "live.github.com"],
+	// ["github-mirrors-education.wlist.top", "education.github.com"],
+	// ["github-mirrors-blog.wlist.top", "github.blog"],
+	// ["github-mirrors-community.wlist.top", "github.community"],
+	// ["github-mirrors-io.wlist.top", "github.io"],
+	//
+	// ["github-mirrors-cloud.wlist.top", "cloud.githubusercontent.com"],
+	// ["github-mirrors-copilot-proxy.wlist.top", "copilot-proxy.githubusercontent.com"],// 1,
+	// ["github-mirrors-desktop.wlist.top", "desktop.githubusercontent.com"],
+	// ["github-mirrors-favicons.wlist.top", "favicons.githubusercontent.com"],
+	// ["github-mirrors-camo.wlist.top", "camo.githubusercontent.com"],
+	// ["github-mirrors-media.wlist.top", "media.githubusercontent.com"],
+	// ["github-mirrors-objects-origin.wlist.top", "objects-origin.githubusercontent.com"],// 1,
+	// ["github-mirrors-actions.wlist.top", "pipelines.actions.githubusercontent.com"],
+	// ["github-mirrors-user-images.wlist.top", "user-images.githubusercontent.com"],
+	// ["github-mirrors-private-avatars.wlist.top", "private-avatars.githubusercontent.com"],// 1,
+	// ["github-mirrors-secured-user-images.wlist.top", "secured-user-images.githubusercontent.com"],// 1,
+	// ["github-mirrors-private-user-images.wlist.top", "private-user-images.githubusercontent.com"],
+	//
+	// ["github-mirrors-s3-cloud.wlist.top", "github-cloud.s3.amazonaws.com"],
+	// ["github-mirrors-s3-com.wlist.top", "github-com.s3.amazonaws.com"],
+	// ["github-mirrors-s3-release-asset.wlist.top", "github-production-release-asset-2e65be.s3.amazonaws.com"],
+	// ["github-mirrors-s3-repository-file.wlist.top", "github-production-repository-file-5c1aeb.s3.amazonaws.com"],
+	// ["github-mirrors-s3-upload-manifest-file.wlist.top", "github-production-upload-manifest-file-7fdce7.s3.amazonaws.com"],// 1,
+	// ["github-mirrors-s3-user-asset.wlist.top", "github-production-user-asset-6210df.s3.amazonaws.com"],
+	//
+	// ["github-mirrors-status-www.wlist.top", "www.githubstatus.com"],// 1,
+	// ["github-mirrors-status.wlist.top", "githubstatus.com"],
 
 	// *.actions.githubusercontent.com
 	// github-production-repository-image-32fea6.s3.amazonaws.com
 	// github-production-release-asset-2e65be.s3.amazonaws.com
-	// github.githubassets.com
 	// objects-origin.githubusercontent.com
 	// viewscreen.githubusercontent.com
 	// notebooks.githubusercontent.com
-	// github.githubassets.com
 	// media.githubusercontent.com
 	// camo.githubusercontent.com
 	// identicons.github.com
-	// avatars.githubusercontent.com
 	// opengraph.githubassets.com
 	// customer-stories-feed.github.com
 	// spotlights-feed.github.com
@@ -71,31 +76,40 @@ const map = [
 
 function replaceToOrigin(value: string) {
 	for (const [proxy, origin] of map) {
-		value = value.replace(new RegExp(`${proxy} `, "g"), `${origin} `);
-		value = value.replace(new RegExp(` ${proxy}`, "g"), ` ${origin}`);
 		value = value.replace(new RegExp(`http\://${proxy}`, "g"), `http://${origin}`);
 		value = value.replace(new RegExp(`https\://${proxy}`, "g"), `https://${origin}`);
 		value = value.replace(new RegExp(`ws\://${proxy}`, "g"), `ws://${origin}`);
 		value = value.replace(new RegExp(`wss\://${proxy}`, "g"), `wss://${origin}`);
+	}
+	for (const [proxy, origin] of map) {
+		value = value.replace(new RegExp(`${proxy} `, "g"), `${origin} `);
+		value = value.replace(new RegExp(` ${proxy}`, "g"), ` ${origin}`);
 	}
 	return value;
 }
 
 function replaceToProxy(value: string) {
 	for (const [proxy, origin] of map) {
-		value = value.replace(new RegExp(`${origin} `, "g"), `${proxy} `);
-		value = value.replace(new RegExp(` ${origin}`, "g"), ` ${proxy}`);
 		value = value.replace(new RegExp(`http\://${origin}`, "g"), `http://${proxy}`);
 		value = value.replace(new RegExp(`https\://${origin}`, "g"), `https://${proxy}`);
 		value = value.replace(new RegExp(`ws\://${origin}`, "g"), `ws://${proxy}`);
 		value = value.replace(new RegExp(`wss\://${origin}`, "g"), `wss://${proxy}`);
+	}
+	for (const [proxy, origin] of map) {
+		value = value.replace(new RegExp(`${origin} `, "g"), `${proxy} `);
+		value = value.replace(new RegExp(` ${origin}`, "g"), ` ${proxy}`);
 	}
 	return value;
 }
 
 function requireReplaceContent(headers: Headers) {
 	const type = headers.get("content-type");
+	console.log(`headers type: ${type}`);
 	if (type == null) return false;
+	if (type.includes("image")) return false;
+	if (type.includes("font")) return false;
+	if (type.includes("video")) return false;
+	if (type.includes("audio")) return false;
 	for (const mime in ["text", "javascript", "json", "css", "html", "xml"]) {
 		if (type.includes(mime)) {
 			return true;
