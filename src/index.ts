@@ -116,6 +116,7 @@ function requireReplaceContent(headers: Headers, method: string) {
 	else if (type.includes("css")) replace = true;
 	else if (type.includes("html")) replace = true;
 	else if (type.includes("xml")) replace = true;
+	else if (type.includes("application")) replace = true;
 	console.log(`on ${method} content type '${type}': replace = ${replace}`);
 	return replace ?? false;
 }
