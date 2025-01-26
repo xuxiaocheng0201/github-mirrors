@@ -54,28 +54,28 @@ const map = [
 
 function replaceToOrigin(value: string) {
 	for (const [proxy, origin] of map) {
-		value = value.replace(new RegExp(`http\://${proxy}`, "g"), `http://${origin}`);
-		value = value.replace(new RegExp(`https\://${proxy}`, "g"), `https://${origin}`);
-		value = value.replace(new RegExp(`ws\://${proxy}`, "g"), `ws://${origin}`);
-		value = value.replace(new RegExp(`wss\://${proxy}`, "g"), `wss://${origin}`);
+		value = value.replaceAll(`http\://${proxy}`, `http://${origin}`);
+		value = value.replaceAll(`https\://${proxy}`, `https://${origin}`);
+		value = value.replaceAll(`ws\://${proxy}`, `ws://${origin}`);
+		value = value.replaceAll(`wss\://${proxy}`, `wss://${origin}`);
 	}
 	for (const [proxy, origin] of map) {
-		value = value.replace(new RegExp(`${proxy} `, "g"), `${origin} `);
-		value = value.replace(new RegExp(` ${proxy}`, "g"), ` ${origin}`);
+		value = value.replaceAll(`${proxy} `, `${origin} `);
+		value = value.replaceAll(` ${proxy}`, ` ${origin}`);
 	}
 	return value;
 }
 
 function replaceToProxy(value: string) {
 	for (const [proxy, origin] of map) {
-		value = value.replace(new RegExp(`http\://${origin}`, "g"), `http://${proxy}`);
-		value = value.replace(new RegExp(`https\://${origin}`, "g"), `https://${proxy}`);
-		value = value.replace(new RegExp(`ws\://${origin}`, "g"), `ws://${proxy}`);
-		value = value.replace(new RegExp(`wss\://${origin}`, "g"), `wss://${proxy}`);
+		value = value.replaceAll(`http\://${origin}`, `http://${proxy}`);
+		value = value.replaceAll(`https\://${origin}`, `https://${proxy}`);
+		value = value.replaceAll(`ws\://${origin}`, `ws://${proxy}`);
+		value = value.replaceAll(`wss\://${origin}`, `wss://${proxy}`);
 	}
 	for (const [proxy, origin] of map) {
-		value = value.replace(new RegExp(`${origin} `, "g"), `${proxy} `);
-		value = value.replace(new RegExp(` ${origin}`, "g"), ` ${proxy}`);
+		value = value.replaceAll(`${origin} `, `${proxy} `);
+		value = value.replaceAll(` ${origin}`, ` ${proxy}`);
 	}
 	return value;
 }
