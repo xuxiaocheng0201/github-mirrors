@@ -1,14 +1,18 @@
 const map = [
 	// https://github.com
 	["github-mirrors.wlist.top", "github.com"],
-	["github-mirrors-assets.wlist.top", "github.githubassets.com"], // not necessary
-	["github-mirrors-collector.wlist.top", "collector.github.com"], // not necessary
-	["github-mirrors-api.wlist.top", "api.github.com"], // not necessary
+	["github-mirrors-assets.wlist.top", "github.githubassets.com"],
+	["github-mirrors-collector.wlist.top", "collector.github.com"],
+	["github-mirrors-api.wlist.top", "api.github.com"],
 
 	// https://github.com/xuxiaocheng0201
 	["github-mirrors-avatars.wlist.top", "avatars.githubusercontent.com"],
 	["github-mirrors-raw.wlist.top", "raw.githubusercontent.com"],
 	["github-mirrors-uploads.wlist.top", "uploads.github.com"],
+
+	// https://github.com/xuxiaocheng0201/github-mirrors/issues
+	["github-mirrors-s3-user-asset.wlist.top", "github-production-user-asset-6210df.s3.amazonaws.com"],
+	["github-mirrors-private-user-images.wlist.top", "private-user-images.githubusercontent.com"],
 
 	// https://github.com/xuxiaocheng0201/github-mirrors/releases
 	["github-mirrors-codeload.wlist.top", "codeload.github.com"],
@@ -38,39 +42,13 @@ const map = [
 	// ["github-mirrors-user-images.wlist.top", "user-images.githubusercontent.com"],
 	// ["github-mirrors-private-avatars.wlist.top", "private-avatars.githubusercontent.com"],// 1,
 	// ["github-mirrors-secured-user-images.wlist.top", "secured-user-images.githubusercontent.com"],// 1,
-	// ["github-mirrors-private-user-images.wlist.top", "private-user-images.githubusercontent.com"],
 	//
 	// ["github-mirrors-s3-cloud.wlist.top", "github-cloud.s3.amazonaws.com"],
 	// ["github-mirrors-s3-com.wlist.top", "github-com.s3.amazonaws.com"],
 	// ["github-mirrors-s3-release-asset.wlist.top", "github-production-release-asset-2e65be.s3.amazonaws.com"],
 	// ["github-mirrors-s3-repository-file.wlist.top", "github-production-repository-file-5c1aeb.s3.amazonaws.com"],
 	// ["github-mirrors-s3-upload-manifest-file.wlist.top", "github-production-upload-manifest-file-7fdce7.s3.amazonaws.com"],// 1,
-	// ["github-mirrors-s3-user-asset.wlist.top", "github-production-user-asset-6210df.s3.amazonaws.com"],
-	//
-	// ["github-mirrors-status-www.wlist.top", "www.githubstatus.com"],// 1,
-	// ["github-mirrors-status.wlist.top", "githubstatus.com"],
 
-	// *.actions.githubusercontent.com
-	// github-production-repository-image-32fea6.s3.amazonaws.com
-	// github-production-release-asset-2e65be.s3.amazonaws.com
-	// objects-origin.githubusercontent.com
-	// viewscreen.githubusercontent.com
-	// notebooks.githubusercontent.com
-	// media.githubusercontent.com
-	// camo.githubusercontent.com
-	// identicons.github.com
-	// opengraph.githubassets.com
-	// customer-stories-feed.github.com
-	// spotlights-feed.github.com
-
-	// proxy.individual.githubcopilot.com
-	// proxy.business.githubcopilot.com
-	// proxy.enterprise.githubcopilot.com
-	// api.githubcopilot.com
-	// api.individual.githubcopilot.com
-	// api.business.githubcopilot.com
-	// api.enterprise.githubcopilot.com
-	// copilot-workspace.githubnext.com
 ];
 
 
