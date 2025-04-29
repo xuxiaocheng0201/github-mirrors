@@ -4,10 +4,8 @@
 !/package.json
 !/package-lock.json
 !/tsconfig.json
+!/vitest.config.mts
 !/wrangler.toml
 
 !/src
-!/Readme.md
-
-!/vitest.config.mts
-!/test
+!/README.md
