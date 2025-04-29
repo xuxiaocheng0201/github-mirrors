@@ -2,7 +2,7 @@ const map = [
 	// https://github.com
 	["github-mirrors.wlist.top", "github.com"],
 	["github-mirrors-assets.wlist.top", "github.githubassets.com"],
-	["github-mirrors-collector.wlist.top", "collector.github.com"],
+	// ["github-mirrors-collector.wlist.top", "collector.github.com"],
 	["github-mirrors-api.wlist.top", "api.github.com"],
 
 	// https://github.com/xuxiaocheng0201
@@ -63,6 +63,7 @@ function replaceToOrigin(value: string) {
 		value = value.replaceAll(`${proxy} `, `${origin} `);
 		value = value.replaceAll(` ${proxy}`, ` ${origin}`);
 	}
+	value.replaceAll(/[0-9a-f]{24}-application\/javascript/g, 'application/javascript');
 	return value;
 }
 
