@@ -63,7 +63,7 @@ function replaceToOrigin(value: string) {
 		value = value.replaceAll(`${proxy} `, `${origin} `);
 		value = value.replaceAll(` ${proxy}`, ` ${origin}`);
 	}
-	value.replaceAll(/[0-9a-f]{24}-application\/javascript/g, 'application/javascript');
+	value = value.replaceAll(/[0-9a-f]{24}-application\/javascript/g, 'application/javascript');
 	return value;
 }
 
