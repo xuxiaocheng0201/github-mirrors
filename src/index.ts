@@ -127,11 +127,29 @@ async function responseToProxy(response: Response) {
 	for (const [key, value] of response.headers) {
 		headers.set(key, replaceToProxy(value));
 	}
+	headers.set("access-control-allow-origin", "*");
+	headers.set("access-control-expose-headers", "*");
+	headers.delete("content-security-policy");
 	const replace = requireReplaceContent(response.headers, "response");
 	const body = replace ? replaceToProxy(await response.text()) : response.body;
 	return new Response(body, {
 		status: response.status,
 		headers: headers,
+	});
+}
+
+function checkPreflight(request: Request) {
+	return request.method == "OPTIONS" && request.headers.has("access-control-request-headers");
+}
+function getPreflightResponse() {
+	return new Response(null, {
+		status: 204,
+		headers: new Headers({
+			'access-control-allow-origin': '*',
+			'access-control-expose-headers': '*',
+			'access-control-allow-methods': 'GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS',
+			'access-control-max-age': '1728000',
+		}),
 	});
 }
 
@@ -157,9 +175,14 @@ export default {
 			if (!checkAccessible(request, env)) {
 				return new Response("Not Implemented", { status: 501 });
 			}
-			const originRequest = await requestToOrigin(request);
-			const originResponse = await fetch(originRequest);
-			const response = await responseToProxy(originResponse);
+			let response: Response;
+			if (checkPreflight(request)) {
+				response = getPreflightResponse();
+			} else {
+				const originRequest = await requestToOrigin(request);
+				const originResponse = await fetch(originRequest);
+				response = await responseToProxy(originResponse);
+			}
 			console.info({
 				"client-ip": request.headers.get("cf-connecting-ip"),
 				"user-agent": request.headers.get("user-agent"),
