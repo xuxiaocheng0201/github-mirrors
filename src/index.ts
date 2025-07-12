@@ -84,6 +84,7 @@ function requireReplaceContent(headers: Headers, method: string) {
 	const type = headers.get("content-type");
 	let replace: boolean | null = null;
 	if (type == null) replace = false;
+	else if (type.includes("octet-stream")) replace = false;
 	else if (type.includes("image")) replace = false;
 	else if (type.includes("font")) replace = false;
 	else if (type.includes("video")) replace = false;
