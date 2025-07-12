@@ -1,9 +1,9 @@
 const map = [
 	// https://github.com
 	["github-mirrors.wlist.top", "github.com"],
-	["github-mirrors-assets.wlist.top", "github.githubassets.com"],
+	// ["github-mirrors-assets.wlist.top", "github.githubassets.com"],
 	// ["github-mirrors-collector.wlist.top", "collector.github.com"],
-	["github-mirrors-api.wlist.top", "api.github.com"],
+	// ["github-mirrors-api.wlist.top", "api.github.com"],
 
 	// https://github.com/xuxiaocheng0201
 	["github-mirrors-avatars.wlist.top", "avatars.githubusercontent.com"],
@@ -11,12 +11,11 @@ const map = [
 	["github-mirrors-uploads.wlist.top", "uploads.github.com"],
 
 	// https://github.com/xuxiaocheng0201/github-mirrors/issues
-	["github-mirrors-s3-user-asset.wlist.top", "github-production-user-asset-6210df.s3.amazonaws.com"],
+	// ["github-mirrors-s3-user-asset.wlist.top", "github-production-user-asset-6210df.s3.amazonaws.com"],
 	["github-mirrors-private-user-images.wlist.top", "private-user-images.githubusercontent.com"],
 
 	// https://github.com/xuxiaocheng0201/github-mirrors/releases
-	["github-mirrors-codeload.wlist.top", "codeload.github.com"],
-	["github-mirrors-objects.wlist.top", "objects.githubusercontent.com"],
+	// ["github-mirrors-objects.wlist.top", "objects.githubusercontent.com"],
 
 	// https://gist.github.com
 	["github-mirrors-gist.wlist.top", "gist.github.com"],
