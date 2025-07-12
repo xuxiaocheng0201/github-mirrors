@@ -131,6 +131,7 @@ async function responseToProxy(response: Response) {
 	headers.set("access-control-expose-headers", "*");
 	headers.delete("content-security-policy");
 	const replace = requireReplaceContent(response.headers, "response");
+	headers.set("x-replaced-body", replace ? "true" : "false");
 	const body = replace ? replaceToProxy(await response.text()) : response.body;
 	return new Response(body, {
 		status: response.status,
@@ -146,7 +147,6 @@ function getPreflightResponse() {
 		status: 204,
 		headers: new Headers({
 			'access-control-allow-origin': '*',
-			'access-control-expose-headers': '*',
 			'access-control-allow-methods': 'GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS',
 			'access-control-max-age': '1728000',
 		}),
