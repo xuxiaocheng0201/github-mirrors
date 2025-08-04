@@ -155,7 +155,7 @@ function getPreflightResponse() {
 }
 
 function checkAccessible(request: Request, env: Env) {
-	const userAgent = request.headers.get("user-agent");
+	const userAgent = request.headers.get("user-agent") || "";
 	const ip = request.headers.get("cf-connecting-ip");
 	const country = request.headers.get("cf-ipcountry");
 	if (userAgent == null || ip == null || country == null) return false;
